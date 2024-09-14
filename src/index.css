@@ -166,7 +166,6 @@ main {
 
 .demo input[type="text"] {
   font-family: "Montserrat";
-  color: rgb(229, 229, 229);
 }
 
 .demo .chatbots {
@@ -186,8 +185,8 @@ main {
 
 .demo .chatbot h3 {
   text-align: center;
-  background-color: rgb(249, 98, 93);
-  color: white;
+  background-color: #F5CCD5;
+  color: rgb(0, 0, 0);
   font-family: "Montserrat";
   height: 10%;
   align-content: center;
@@ -239,5 +238,193 @@ i:hover {
   cursor: pointer;
   text-shadow: 0 0 20px #fff;
 }
+
+.demo .chatbot .query {
+  color: blue;
+}
+
+.demo .chatbot .response {
+  color: green;
+  font-weight: bold;
+}
+
+/* General Chatbot Styling */
+.demo .chatbot {
+  width: 500px;
+  height: 500px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  margin: 0 50px 50px 50px;
+  padding: 20px;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.demo .chatbot .answer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.demo .user-message {
+  align-self: flex-end;
+  background-color: #007bff; /* Blue background for user */
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.demo .ai-message {
+  align-self: flex-start;
+  background-color: #f1f1f1; /* White background for AI */
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.demo input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  border: none;
+}
+
+.demo input:focus {
+  outline: none;
+}
+
+button {
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: grey;
+}
+
+/* General Chatbot Styling */
+.demo .chatbot {
+  width: 500px;
+  height: 500px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  margin: 0 50px 50px 50px;
+  padding: 20px;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.demo .chatbot .answer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.demo .user-message {
+  align-self: flex-end;
+  background-color: #007bff; /* Blue background for user */
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.demo .ai-message {
+  align-self: flex-start;
+  background-color: #f1f1f1; /* White background for AI */
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.demo input {
+  width: 1100px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  border: none;
+}
+
+.demo input:focus {
+  outline: none;
+}
+
+button {
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: grey;
+}
+
+/* Input and Button on Same Line */
+.input-container {
+  display: flex;              /* Use Flexbox to align items horizontally */
+  align-items: center;        /* Vertically center the input and button */
+  justify-content: center;    /* Horizontally center the input and button */
+  margin-bottom: 20px;        /* Add space below the input area */
+}
+
+.input-container input {
+  width: 85%;                 /* Adjust width of input to leave space for the button */
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  border: none;
+  margin-right: 10px;         /* Add space between input and button */
+}
+
+.input-container input:focus {
+  outline: none;
+}
+
+.input-container button {
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.input-container button:hover {
+  background-color: grey;
+}
+
+
+
 
 
