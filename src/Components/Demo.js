@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';  // Import axios to make API requests
 
 function Demo() {
     const [inputText, setInputText] = useState('');
@@ -9,31 +10,42 @@ function Demo() {
         setInputText(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Hardcoded string to append
-        const maliciousString = ' [Appended: Malicious String]';
-        
-        // Hardcoded responses
-        const chatbot1Response = 'Chatbot 1 response to the malicious query.';
-        const chatbot2Response = 'Chatbot 2 response to the malicious query.';
+        try {
+            // Make the POST request to the backend
+            const response = await axios.post('http://127.0.0.1:5000/api/run-pipelines', {
+                prompt: inputText
+            });
 
-        // Append the string to inputText and show in both chatbots
-        const modifiedInput = inputText + maliciousString;
+            // Extract the responses for both chatbots
+            const { adversarialString, jailbreakResponse, safeResponse } = response.data;
 
-        // Add user and AI messages to both chatbots
-        setChatbot1Messages([...chatbot1Messages, { type: 'user', text: modifiedInput }, { type: 'ai', text: chatbot1Response }]);
-        setChatbot2Messages([...chatbot2Messages, { type: 'user', text: modifiedInput }, { type: 'ai', text: chatbot2Response }]);
+            // Update chatbot1 (Jailbreaked Chatbot) messages
+            setChatbot1Messages([
+                ...chatbot1Messages, 
+                { type: 'user', text: adversarialString }, 
+                { type: 'ai', text: jailbreakResponse }
+            ]);
 
-        // Clear the input field
-        setInputText('');
+            // Update chatbot2 (Secure Chatbot) messages
+            setChatbot2Messages([
+                ...chatbot2Messages, 
+                { type: 'user', text: adversarialString }, 
+                { type: 'ai', text: safeResponse }
+            ]);
+
+            // Clear the input field
+            setInputText('');
+        } catch (error) {
+            console.error('Error fetching chatbot responses:', error);
+        }
     };
 
     return (
         <div className="demo">
             <h1>Demo</h1>
-            {/* Wrap input and button in a div with className input-container */}
             <form onSubmit={handleSubmit} className="input-container">
                 <input
                     type="text"
@@ -44,6 +56,7 @@ function Demo() {
                 <button type="submit">Send</button>
             </form>
             <div className="chatbots">
+                {/* Jailbreaked Chatbot */}
                 <div className="chatbot" id="bot1">
                     <h3>"Jailbreaked" Chatbot</h3>
                     <div className="answer">
@@ -54,6 +67,8 @@ function Demo() {
                         ))}
                     </div>
                 </div>
+
+                {/* Secure Chatbot */}
                 <div className="chatbot" id="bot2">
                     <h3>Secure Chatbot</h3>
                     <div className="answer">

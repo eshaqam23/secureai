@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
 
-import Logo from './Components/Logo';
-import Home from './Components/Home';
-import Demo from './Components/Demo';
+import Logo from './Components/Logo.js';
+import Home from './Components/Home.js';
+import Demo from './Components/Demo.js';
 import Team from './Components/Team.js';
-import Resources from './Components/Resources';
+import Resources from './Components/Resources.js';
 import Footer from './Components/Footer.js';
 
 function App() {
