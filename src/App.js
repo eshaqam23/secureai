@@ -6,23 +6,40 @@ import Home from './Components/Home';
 import Demo from './Components/Demo';
 import Team from './Components/Team.js';
 import Resources from './Components/Resources';
+import Footer from './Components/Footer.js';
 
 function App() {
   const [tab, setTab] = useState("home");
 
   function handleHome () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Smooth scrolling effect
+    });
     setTab("home");
   }
 
   function handleDemo () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Smooth scrolling effect
+    });
     setTab("demo");
   }
 
   function handleTeam () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Smooth scrolling effect
+    });
     setTab("team");
   }
 
   function handleResources () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Smooth scrolling effect
+    });
     setTab("resources");
   }
 
@@ -40,11 +57,14 @@ function App() {
         </div>
       </header>
       <main>
-        {tab === "home" && <Home />}
-        {tab === "demo" && <Demo />}
-        {tab === "team" && <Team />}
-        {tab === "resources" && <Resources />}
+        {tab === "home" && <Home setTab={ setTab } />}
+        {tab === "demo" && <Demo setTab={ setTab } />}
+        {tab === "team" && <Team setTab={ setTab } />}
+        {tab === "resources" && <Resources setTab={ setTab } />}
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }
