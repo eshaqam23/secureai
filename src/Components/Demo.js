@@ -35,11 +35,11 @@ function Demo() {
             <h1>Demo</h1>
             {/* Wrap input and button in a div with className input-container */}
             <form onSubmit={handleSubmit} className="input-container">
-                <input 
-                    type="text" 
-                    value={inputText} 
-                    onChange={handleInputChange} 
-                    placeholder="Enter malicious query here..." 
+                <input
+                    type="text"
+                    value={inputText}
+                    onChange={handleInputChange}
+                    placeholder="Enter malicious query here..."
                 />
                 <button type="submit">Send</button>
             </form>

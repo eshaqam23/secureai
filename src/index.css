@@ -221,7 +221,8 @@ footer {
   top: 80px;
   height: 80px;
   width: 100%;
-  background-color: rgb(249, 98, 93);
+  background-color: #F5CCD5;
+  ;
   display: flex;
   justify-content: center;
   font-size: 2.5em;
@@ -390,19 +391,25 @@ button:hover {
 
 /* Input and Button on Same Line */
 .input-container {
+  width: 1100px;
   display: flex;              /* Use Flexbox to align items horizontally */
   align-items: center;        /* Vertically center the input and button */
   justify-content: center;    /* Horizontally center the input and button */
   margin-bottom: 20px;        /* Add space below the input area */
+  height: 60px;
+  background-color: white;
 }
 
 .input-container input {
   width: 85%;                 /* Adjust width of input to leave space for the button */
+  height: 40px;
   padding: 10px;
   border-radius: 15px;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
   border: none;
   margin-right: 10px;         /* Add space between input and button */
+  position: relative;
+  top: 10px;
 }
 
 .input-container input:focus {
