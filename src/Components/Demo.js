@@ -45,7 +45,7 @@ function Demo() {
             </form>
             <div className="chatbots">
                 <div className="chatbot" id="bot1">
-                    <h3>Chatbot 1</h3>
+                    <h3>"Jailbreaked" Chatbot</h3>
                     <div className="answer">
                         {chatbot1Messages.map((msg, index) => (
                             <div key={index} className={msg.type === 'user' ? 'user-message' : 'ai-message'}>
@@ -55,7 +55,7 @@ function Demo() {
                     </div>
                 </div>
                 <div className="chatbot" id="bot2">
-                    <h3>Chatbot 2</h3>
+                    <h3>Secure Chatbot</h3>
                     <div className="answer">
                         {chatbot2Messages.map((msg, index) => (
                             <div key={index} className={msg.type === 'user' ? 'user-message' : 'ai-message'}>

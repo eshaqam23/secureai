@@ -277,6 +277,7 @@ i:hover {
   max-width: 70%;
   text-align: right;
   margin-bottom: 10px;
+  margin-top: 20px; /* Add some space on top */
 }
 
 .demo .ai-message {
@@ -390,6 +391,7 @@ button:hover {
 
 /* Input and Button on Same Line */
 .input-container {
+  width: 85%; 
   display: flex;              /* Use Flexbox to align items horizontally */
   align-items: center;        /* Vertically center the input and button */
   justify-content: center;    /* Horizontally center the input and button */
@@ -397,7 +399,7 @@ button:hover {
 }
 
 .input-container input {
-  width: 85%;                 /* Adjust width of input to leave space for the button */
+  /* width: 85%;                 Adjust width of input to leave space for the button */
   padding: 10px;
   border-radius: 15px;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
