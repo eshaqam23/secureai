@@ -5,6 +5,10 @@
   list-style: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 header {
   display: flex;
   align-items: center;
@@ -506,7 +510,93 @@ button:hover {
   background-color: grey;
 }
 
+.team h1 {
+  text-align: center;
+  font-family: "Montserrat";
+  padding: 30px;
+}
 
+.team .members {
+  display: flex;
+  flex-direction: row; /* Ensures the members are in a row */
+  flex-wrap: wrap; /* Allows wrapping if the screen gets too narrow */
+  width: 100%;
+  justify-content: space-around; /* Space around the members */
+  align-items: center; /* Centers members vertically */
 
+}
 
+.team .member {
+  display: flex;
+  flex-direction: column; /* Aligns image, name, and role vertically */
+  align-items: center; /* Centers the content in each member box */
+  width: 350px; /* Adjust the width of each member */
+  margin: 20px; /* Adds space around each member */
+  text-align: center; /* Centers text */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
 
+.team .member img {
+  width: 350px;
+  height: auto; /* Ensures square image */
+  object-fit: cover; /* Makes sure the image doesn't stretch */
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.team .member h2 {
+  font-size: 25px;
+  margin: 10px 0 5px;
+  font-family: "Montserrat";
+}
+
+.team .member p {
+  font-size: 14px;
+  color: #666;
+  font-family: "Montserrat";
+}
+
+.resources .resourcePoster {
+  display: grid;
+  grid-template: 650px / 1fr;
+  background-color: rgb(206,76,132);
+  overflow: hidden;
+}
+
+.resources .resourcePoster img {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  z-index: 1;
+  opacity: 0.2;
+  width: 100%;
+}
+
+.resources .resourcePoster h1 {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  z-index: 3;
+  color: white;
+  font-family: "Montserrat";
+  justify-self: center;
+  align-self: center;
+  position: relative;
+  bottom: 55px;
+  font-size: 50px;
+}
+
+.resources .resourcePoster p {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  z-index: 3;
+  color: white;
+  font-family: "Montserrat";
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+  width: 30%;
+  position: relative;
+  top: 55px;
+  font-size: 20px;
+}
