@@ -1,70 +1,182 @@
-# Getting Started with Create React App
+# SecureAI - Chatbot Demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project demonstrates two chatbots: a **Jailbroken** chatbot and a **Secure** chatbot. The **Jailbroken** chatbot processes adversarial queries, while the **Secure** chatbot sanitizes inputs using novel approaches to ensure security. Both chatbots interact with a backend API, with the **Jailbroken** chatbot generating an adversarial string and responding, and the **Secure** chatbot responding after sanitization.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Jailbroken Chatbot**:
+  - Accepts user input and generates an adversarial string.
+  - Processes the adversarial query using a jailbroken LLM model.
+  - Provides a response to the adversarial query.
+  
+- **Secure Chatbot**:
+  - Removes adversarial strings from user input.
+  - Processes the cleaned query using a secure LLM model.
+  - Provides a response based on the cleaned query.
 
-### `npm start`
+## Demo Flow
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. **Jailbroken Chatbot**:
+   - User submits a potentially malicious query.
+   - The system generates an adversarial string.
+   - The adversarial string is processed through the **Jailbroken** LLM.
+   - The chatbot returns a response.
+   
+2. **Secure Chatbot**:
+   - After the Jailbroken chatbot finishes, the **Secure** chatbot sanitizes the adversarial string.
+   - The sanitized input is processed through the **Secure** LLM.
+   - The chatbot returns a safe response.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Setup
 
-### `npm test`
+### Frontend Setup (React)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/your-repo/secureai
+    cd secureai
+    ```
+2. **Install dependencies**:
+    ```bash
+    npm install
+    ```
+3. **Start the development server**:
+    ```bash
+    npm start
+    ```
+4. **Open the app in your browser**:
+   - The app should now be available at: `http://localhost:3000`.
 
-### `npm run build`
+### Backend Setup (Flask)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Navigate to the backend folder**:
+    ```bash
+    cd backend
+    ```
+2. **Install required Python packages**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+3. **Start the Flask backend**:
+    ```bash
+    flask run
+    ```
+4. The backend server will run on `http://127.0.0.1:5000` by default.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## API Endpoints
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `/api/generate-adversarial`
 
-### `npm run eject`
+- **Method**: POST
+- **Description**: Generates an adversarial string based on user input.
+- **Request Payload**:
+    ```json
+    {
+      "prompt": "<user input>"
+    }
+    ```
+- **Response**:
+    ```json
+    {
+      "adversarialString": "<generated adversarial string>"
+    }
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### `/api/run-jailbroken-model`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Method**: POST
+- **Description**: Runs the jailbroken LLM model with the adversarial string.
+- **Request Payload**:
+    ```json
+    {
+      "adversarialString": "<generated adversarial string>"
+    }
+    ```
+- **Response**:
+    ```json
+    {
+      "jailbreakResponse": "<response from jailbroken model>"
+    }
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### `/api/sanitize`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Method**: POST
+- **Description**: Sanitizes the adversarial string to remove malicious content.
+- **Request Payload**:
+    ```json
+    {
+      "inputText": "<adversarial string>"
+    }
+    ```
+- **Response**:
+    ```json
+    {
+      "sanitizedString": "<cleaned input>"
+    }
+    ```
 
-## Learn More
+### `/api/run-secure-model`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Method**: POST
+- **Description**: Runs the secure LLM model with the sanitized input.
+- **Request Payload**:
+    ```json
+    {
+      "sanitizedString": "<cleaned input>"
+    }
+    ```
+- **Response**:
+    ```json
+    {
+      "safeResponse": "<response from secure model>"
+    }
+    ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Structure
 
-### Code Splitting
+```plaintext
+secureai/
+├── src/
+│   ├── components/
+│   │   ├── Demo.js       # Frontend logic for demo chatbots
+│   │   └── other components...
+│   ├── index.js          # Main entry point for the React app
+│   └── App.js            # Main App component
+├── backend/
+│   ├── app.py            # Flask backend serving the API
+│   ├── pipeline.py       # Functions handling adversarial string and LLM processing
+│   └── requirements.txt  # Python dependencies for the backend
+└── README.md             # Project documentation
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## How It Works
 
-### Analyzing the Bundle Size
+1. **Frontend**: 
+   - A user submits a query in the input box on the demo page.
+   - This input is sent to the Flask backend using Axios.
+   - The **Jailbroken chatbot** displays the adversarial string and response.
+   - After the Jailbroken chatbot finishes, the **Secure chatbot** sanitizes the input and generates a response.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2. **Backend**: 
+   - Flask routes handle requests from the frontend.
+   - The `/api/generate-adversarial` endpoint generates adversarial strings.
+   - The `/api/run-jailbroken-model` endpoint runs the LLM using the adversarial string.
+   - The `/api/sanitize` endpoint cleans the adversarial string.
+   - The `/api/run-secure-model` endpoint runs the cleaned input through a secure LLM.
 
-### Making a Progressive Web App
+## Running Tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+For backend tests, ensure that Flask is installed and run:
+```bash
+pytest
+```
 
-### Advanced Configuration
+### Future Enhancements
+   - Integration with a real LLM model for processing adversarial queries.
+   - Enhancing the sanitization logic with additional security measures.
+   - Improve the UI for better visualization and performance.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### License
+   - This project is licensed under the MIT License - see the LICENSE file for details.
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
