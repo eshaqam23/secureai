@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';  // Import axios to make API requests
+import axios from 'axios';
 
 function Demo() {
     const [inputText, setInputText] = useState('');
-    const [status, setStatus] = useState('Awaiting Action...')
+    const [jbStatus, setJbStatus] = useState('Awaiting Action...');
+    const [secStatus, setSecStatus] = useState('Awaiting Action...');
     const [chatbot1Messages, setChatbot1Messages] = useState([]);
     const [chatbot2Messages, setChatbot2Messages] = useState([]);
 
@@ -15,30 +16,51 @@ function Demo() {
         e.preventDefault();
 
         try {
-            // Make the POST request to the backend
-            const response = await axios.post('http://127.0.0.1:5000/api/run-pipelines', {
+            // Step 1: Generate Adversarial String for Jailbroken chatbot
+            setJbStatus("Generating Adversarial String...");
+            const advResponse = await axios.post('http://127.0.0.1:5000/api/generate-adv', {
                 prompt: inputText
             });
 
-            // Extract the responses for both chatbots
-            const { adversarialString, jailbreakResponse, safeResponse } = response.data;
+            const adversarialString = advResponse.data.adversarialString;
+            setChatbot1Messages([...chatbot1Messages, { type: 'user', text: adversarialString }]);
+            setJbStatus("Awaiting LLM response...");
 
-            // Update chatbot1 (Jailbreaked Chatbot) messages
-            setChatbot1Messages([
-                ...chatbot1Messages, 
-                { type: 'user', text: adversarialString }, 
-                { type: 'ai', text: jailbreakResponse }
+            // Step 2: Run LLM for Jailbroken chatbot
+            const llmResponse = await axios.post('http://127.0.0.1:5000/api/run-llm', {
+                prompt: adversarialString
+            });
+
+            setChatbot1Messages(prevMessages => [
+                ...prevMessages,
+                { type: 'ai', text: llmResponse.data.llmResponse }
             ]);
+            setJbStatus("Awaiting Action...");
 
-            // Update chatbot2 (Secure Chatbot) messages
-            setChatbot2Messages([
-                ...chatbot2Messages, 
-                { type: 'user', text: adversarialString }, 
-                { type: 'ai', text: safeResponse }
+            // Step 3: Start the Secure chatbot after Jailbroken chatbot finishes
+            setSecStatus("Removing adversarial string using novel approach...");
+            const sanitizeResponse = await axios.post('http://127.0.0.1:5000/api/sanitize', {
+                inputText: adversarialString
+            });
+
+            const sanitizedString = sanitizeResponse.data.sanitizedString;
+            setChatbot2Messages([...chatbot2Messages, { type: 'user', text: sanitizedString }]);
+            setSecStatus("Awaiting LLM response...");
+
+            // Step 4: Run LLM for Secure chatbot
+            const secureLlmResponse = await axios.post('http://127.0.0.1:5000/api/run-llm', {
+                prompt: sanitizedString
+            });
+
+            setChatbot2Messages(prevMessages => [
+                ...prevMessages,
+                { type: 'ai', text: secureLlmResponse.data.llmResponse }
             ]);
+            setSecStatus("Awaiting Action...");
 
-            // Clear the input field
+            // Clear input field
             setInputText('');
+
         } catch (error) {
             console.error('Error fetching chatbot responses:', error);
         }
@@ -57,7 +79,7 @@ function Demo() {
                 <button type="submit">Send</button>
             </form>
             <div className="chatbots">
-                {/* Jailbreaked Chatbot */}
+                {/* Jailbroken Chatbot */}
                 <div className="chatbot" id="bot1">
                     <h3>"Jailbroken" Chatbot</h3>
                     <div className="answer">
@@ -68,7 +90,7 @@ function Demo() {
                         ))}
                     </div>
                     <div className="query">
-                        <p>Status: {status}</p>
+                        <p>Status: {jbStatus}</p>
                     </div>
                 </div>
 
@@ -83,7 +105,7 @@ function Demo() {
                         ))}
                     </div>
                     <div className="query">
-                        <p>Status: {status}</p>
+                        <p>Status: {secStatus}</p>
                     </div>
                 </div>
             </div>
