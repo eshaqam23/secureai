@@ -3,6 +3,7 @@ import axios from 'axios';  // Import axios to make API requests
 
 function Demo() {
     const [inputText, setInputText] = useState('');
+    const [status, setStatus] = useState('Awaiting Action...')
     const [chatbot1Messages, setChatbot1Messages] = useState([]);
     const [chatbot2Messages, setChatbot2Messages] = useState([]);
 
@@ -58,13 +59,16 @@ function Demo() {
             <div className="chatbots">
                 {/* Jailbreaked Chatbot */}
                 <div className="chatbot" id="bot1">
-                    <h3>"Jailbreaked" Chatbot</h3>
+                    <h3>"Jailbroken" Chatbot</h3>
                     <div className="answer">
                         {chatbot1Messages.map((msg, index) => (
                             <div key={index} className={msg.type === 'user' ? 'user-message' : 'ai-message'}>
                                 <strong>{msg.type === 'user' ? 'User:' : 'AI:'}</strong> {msg.text}
                             </div>
                         ))}
+                    </div>
+                    <div className="query">
+                        <p>Status: {status}</p>
                     </div>
                 </div>
 
@@ -77,6 +81,9 @@ function Demo() {
                                 <strong>{msg.type === 'user' ? 'User:' : 'AI:'}</strong> {msg.text}
                             </div>
                         ))}
+                    </div>
+                    <div className="query">
+                        <p>Status: {status}</p>
                     </div>
                 </div>
             </div>
