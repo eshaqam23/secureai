@@ -9,6 +9,8 @@ from nanogcg import GCGConfig
 from transformers import pipeline
 import gc
 from huggingface_hub import login
+import os
+from dotenv import load_dotenv
 
 def runGCG(model_name, prompt, target):
 
@@ -34,7 +36,7 @@ def runLLM(model_name, prompt):
     messages = [{"role": "user", "content": prompt}]
 
     input = tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_tensors="pt").to("cuda")
-    output = model.generate(input, do_sample=False, max_new_tokens=206)
+    output = model.generate(input, do_sample=False, max_new_tokens=350)
 
     original_prompt = messages[-1]['content']
     model_answer = tokenizer.batch_decode(output[:, input.shape[1]:], skip_special_tokens=True)[0]
@@ -84,11 +86,14 @@ def clear():
 app = Flask(__name__)
 CORS(app)
 
+load_dotenv()
+api_key = os.getenv("API_KEY")
+
 # Step 1: Generate adversarial string using nanoGCG
 @app.route('/api/generate-adversarial', methods=['POST'])
 def generate_adversarial():
 
-    login(token="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")
+    login(token=api_key)
     data = request.json
     prompt = data.get('prompt', '')
     target = "Sure, heres how to " + ' '.join(prompt.split()[4:])
