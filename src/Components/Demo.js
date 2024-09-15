@@ -91,6 +91,7 @@ function Demo() {
                     </div>
                     <div className="query">
                         <p>Status: {jbStatus}</p>
+                        {jbStatus !== "Awaiting Action..." && <div class="loader"></div>}
                     </div>
                 </div>
 
@@ -106,6 +107,7 @@ function Demo() {
                     </div>
                     <div className="query">
                         <p>Status: {secStatus}</p>
+                        {secStatus !== "Awaiting Action..." && <div class="loader"></div>}
                     </div>
                 </div>
             </div>

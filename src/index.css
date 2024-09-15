@@ -427,6 +427,7 @@ button:hover {
   max-width: 70%;
   text-align: left;
   margin-bottom: 10px;
+  font-family: "Montserrat";
 }
 
 .demo .ai-message {
@@ -438,6 +439,7 @@ button:hover {
   max-width: 70%;
   text-align: left;
   margin-bottom: 10px;
+  font-family: "Montserrat";
 }
 
 .demo input {
@@ -599,4 +601,28 @@ button:hover {
   position: relative;
   top: 55px;
   font-size: 20px;
+}
+
+.loader {
+  border: 4px solid #f3f3f3; /* Light grey */
+  border-top: 4px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 2s linear infinite;
+  align-self: center;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.query {
+  display: flex;
+  justify-content: space-between;
+}
+
+.query p {
+
 }
