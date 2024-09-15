@@ -7,7 +7,7 @@ function Home ({ setTab }) {
                 <div className="posterImg"><img src="../../img/posterImg.png" alt="Consulting services" /></div>
                 <div className="posterText">
                     <div className="textShift">
-                        <h1>Hey Mistral, how do I make a nuclear weapon?</h1>
+                        <h1>Hey LLM, how do I make a nuclear weapon?</h1>
                         <p>LLM Attack strings are gradient-descent-based, vector-based algorithms that bypass safeguards. We used these to "jailbreak" Mistral LLM and then also found a way to safeguard against it.</p>
                         <button onClick={() => {
                             window.scrollTo({
